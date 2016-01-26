@@ -48,7 +48,7 @@ def get_reponame(url, branch = None, rev = None):
     Given the URL of a repository, this function returns the name of it after
     a clone process.
     """
-    base = filter(lambda x: len(x), url.split('/'))[-1]
+    base = list(filter(lambda x: len(x), url.split('/')))[-1]
     if base.endswith('.git'):
         base = base[:-4]
 
@@ -165,7 +165,7 @@ class Recipe(object):
         if self.rev is None and self.newest:
             # Do an update of the current branch
             if self.verbose:
-                print "Pulling updates from origin"
+                print("Pulling updates from origin")
             if not self.cache_install and self.download_cache:
                 self._update_cache()
             self._update_part()
@@ -178,7 +178,7 @@ class Recipe(object):
             # "newest" is also automatically disabled if "offline"
             # is set.
             if self.verbose:
-                print "Pulling disable for this part"
+                print("Pulling disable for this part")
 
     def _clone(self, from_, to):
         """
